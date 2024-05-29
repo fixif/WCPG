@@ -63,31 +63,31 @@ extern "C" {
 #include "aux_funcs.h"
 
 
-#include <f2c.h>
+//#include <f2c.h>
 
 #ifdef CLAPACK_HEADER
 	#include <clapack.h>
 #endif
 
-#ifdef LAPACK_HEADER
-	#include <lapack.h>
-#endif
+// #ifdef LAPACK_HEADER
+// 	#include <lapack.h>
+// #endif
 
 #ifdef LAPACKE_HEADER
 	#include <lapacke.h>
 #endif
 
-#ifdef BLAS_HEADER
-	#include <blas.h>
-#endif
+// #ifdef BLAS_HEADER
+// 	#include <blas.h>
+// #endif
 
-#ifdef CBLAS_HEADER
-	#include <cblas.h>
-#endif
+// #ifdef CBLAS_HEADER
+// 	#include <cblas.h>
+// #endif
 
-#ifdef BLASWRAP_HEADER
-	#include <blaswrap.h>
-#endif
+//#ifdef BLASWRAP_HEADER
+//	#include <blaswrap.h>
+//#endif
  
 #include <complex.h>
 typedef struct complexdouble

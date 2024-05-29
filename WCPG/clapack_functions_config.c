@@ -89,8 +89,8 @@ void my_zgetrf(int *m, int *n, complexdouble *A,
 					}
 				}
 		wcpgSafeFree(newA);
-	#else
-		zgetrf_((integer*)m, (integer*)n, (doublecomplex*)A, (integer*)lda, (integer*)ipiv, (integer*)info);
+	// #else
+	// 	zgetrf_((integer*)m, (integer*)n, (doublecomplex*)A, (integer*)lda, (integer*)ipiv, (integer*)info);
 	#endif
 
 }
@@ -132,8 +132,8 @@ void my_zgetri(int *n, complexdouble *A, int *lda,
 				}
 		wcpgSafeFree(newA);
 	
-	#else
-		zgetri_((integer*)n, (doublecomplex*)A, (integer*)lda, (integer*)ipiv, (doublecomplex*)work, (integer*)lwork, (integer*)info);
+	// #else
+		// zgetri_((integer*)n, (doublecomplex*)A, (integer*)lda, (integer*)ipiv, (doublecomplex*)work, (integer*)lwork, (integer*)info);
 	#endif
 
 
@@ -158,20 +158,20 @@ void my_dgeevx(int *n, double *A, int *lda, double *wr, double *wi, double *vl, 
 
 		*info = LAPACKE_dgeevx(LAPACK_COL_MAJOR, 'N', 'V', 'V','B',*n, A, *lda, wr, wi, vl, *ldvl, vr, *ldvr, ilo, ihi, scale, abnrm, rconde, rcondv);
 
-	#else
-		/* dgeevx_(char *balanc, char *jobvl, char *jobvr, char *
-	sense, integer *n, real *a, integer *lda, real *wr, real *wi, real *
-	vl, integer *ldvl, real *vr, integer *ldvr, integer *ilo, integer *
-	ihi, real *scale, real *abnrm, real *rconde, real *rcondv, real *work, 
-	 integer *lwork, integer *iwork, integer *info);*/
-		char *jobvr = "V";
-		char *jobvl = "V";
-		char *balanc = "N";
-		char *sense = "B";
-		dgeevx_(balanc, jobvl, jobvr, sense,(integer*)n, (doublereal*)A, (integer*)lda, wr, wi, \
-				 vl, (integer*)ldvl, vr, (integer*)ldvr, (integer*)ilo, (integer*)ihi,\
-				 scale, abnrm, rconde, rcondv, work, (integer*)lwork, (integer*)iwork,\
-				 (integer*)info); 
+	// #else
+	// 	/* dgeevx_(char *balanc, char *jobvl, char *jobvr, char *
+	// sense, integer *n, real *a, integer *lda, real *wr, real *wi, real *
+	// vl, integer *ldvl, real *vr, integer *ldvr, integer *ilo, integer *
+	// ihi, real *scale, real *abnrm, real *rconde, real *rcondv, real *work, 
+	//  integer *lwork, integer *iwork, integer *info);*/
+	// 	char *jobvr = "V";
+	// 	char *jobvl = "V";
+	// 	char *balanc = "N";
+	// 	char *sense = "B";
+	// 	dgeevx_(balanc, jobvl, jobvr, sense,(integer*)n, (doublereal*)A, (integer*)lda, wr, wi, \
+	// 			 vl, (integer*)ldvl, vr, (integer*)ldvr, (integer*)ilo, (integer*)ihi,\
+	// 			 scale, abnrm, rconde, rcondv, work, (integer*)lwork, (integer*)iwork,\
+	// 			 (integer*)info); 
 	
 	#endif
 }
