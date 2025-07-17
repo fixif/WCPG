@@ -1,0 +1,93 @@
+cmake_minimum_required(VERSION 3.12)
+project(WCPG LANGUAGES C)
+
+# Add custom modules path
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/")
+
+include(CheckIncludeFile)
+include(CheckIncludeFiles)
+
+# === Find required packages ===
+find_package(GMP REQUIRED)
+find_package(MPFR REQUIRED)
+find_package(MPFI REQUIRED)
+find_package(LAPACK REQUIRED)
+
+# === Header checks ===
+check_include_file(stdbool.h HAVE_STDBOOL_H)
+check_include_files("string.h;float.h;sys/time.h;limits.h" HAVE_SYS_HEADERS)
+
+# === Required headers enforcement (additional to find_package) ===
+check_include_file(mpfr.h HAVE_MPFR_H)
+check_include_file(mpfi.h HAVE_MPFI_H)
+check_include_file(mpfi_io.h HAVE_MPFI_IO_H)
+check_include_file(lapacke.h HAVE_LAPACKE_H)
+
+if(NOT HAVE_MPFR_H)
+    message(FATAL_ERROR "Required header 'mpfr.h' not found.")
+endif()
+if(NOT HAVE_MPFI_H)
+    message(FATAL_ERROR "Required header 'mpfi.h' not found.")
+endif()
+if(NOT HAVE_MPFI_IO_H)
+    message(FATAL_ERROR "Required header 'mpfi_io.h' not found.")
+endif()
+if(NOT HAVE_LAPACKE_H)
+    message(FATAL_ERROR "Required header 'lapacke.h' not found.")
+endif()
+
+# === Generate config.h ===
+configure_file(
+    ${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
+    ${CMAKE_CURRENT_BINARY_DIR}/config.h
+)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+
+# === Source files ===
+file(GLOB WCPG_SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/WCPG/*.c")
+
+add_library(wcpg STATIC ${WCPG_SOURCES})
+
+target_include_directories(wcpg
+    PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+        $<INSTALL_INTERFACE:include>
+        ${GMP_INCLUDE_DIRS}
+        ${MPFR_INCLUDE_DIRS}
+        ${MPFI_INCLUDE_DIRS}
+        ${LAPACK_INCLUDE_DIRS}
+)
+
+target_compile_features(wcpg PUBLIC c_std_89)
+
+target_link_libraries(wcpg
+    PUBLIC
+        ${GMP_LIBRARIES}
+        ${MPFR_LIBRARIES}
+        ${MPFI_LIBRARIES}
+        ${LAPACK_LIBRARIES}
+)
+
+# === Optional examples ===
+option(BUILD_EXAMPLES "Build example programs" ON)
+if(BUILD_EXAMPLES)
+    file(GLOB EX_SOURCES "exampleProgram/*.c")
+    foreach(file ${EX_SOURCES})
+        get_filename_component(name ${file} NAME_WE)
+        add_executable(${name} ${file})
+        target_link_libraries(${name} PRIVATE wcpg)
+    endforeach()
+endif()
+
+# === Installation ===
+include(GNUInstallDirs)
+
+install(TARGETS wcpg
+    ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
+    PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/wcpg
+)
+
+install(DIRECTORY include/wcpg/
+    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/wcpg
+    FILES_MATCHING PATTERN "*.h"
+)

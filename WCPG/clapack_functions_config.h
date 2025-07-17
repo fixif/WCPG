@@ -65,17 +65,17 @@ extern "C" {
 
 //#include <f2c.h>
 
-#ifdef CLAPACK_HEADER
-	#include <clapack.h>
-#endif
+//#ifdef CLAPACK_HEADER
+//	#include <clapack.h>
+//#endif
 
 // #ifdef LAPACK_HEADER
 // 	#include <lapack.h>
 // #endif
 
-#ifdef LAPACKE_HEADER
+//#ifdef LAPACKE_HEADER
 	#include <lapacke.h>
-#endif
+//#endif
 
 // #ifdef BLAS_HEADER
 // 	#include <blas.h>

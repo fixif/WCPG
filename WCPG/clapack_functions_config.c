@@ -59,7 +59,7 @@ void my_zgetrf(int *m, int *n, complexdouble *A,
  	int *lda, int *ipiv, int *info)
 {
 		
-	#ifdef LAPACKE_HEADER		//if we have non-standard clapack wrapper
+	//#ifdef LAPACKE_HEADER		//if we have non-standard clapack wrapper
 
 		//we convert complexdouble *A into lapacke_complex type
 		lapacke_complex *newA = (lapacke_complex*)wcpgSafeMalloc((*m) * (*n) * sizeof(lapacke_complex));
@@ -91,7 +91,7 @@ void my_zgetrf(int *m, int *n, complexdouble *A,
 		wcpgSafeFree(newA);
 	// #else
 	// 	zgetrf_((integer*)m, (integer*)n, (doublecomplex*)A, (integer*)lda, (integer*)ipiv, (integer*)info);
-	#endif
+	//#endif
 
 }
 
@@ -99,7 +99,7 @@ void my_zgetri(int *n, complexdouble *A, int *lda,
 		int *ipiv, complexdouble *work, int *lwork, int *info)
 {
 		
-	#ifdef LAPACKE_HEADER 	//if we have non-standard clapack wrapper
+	//#ifdef LAPACKE_HEADER 	//if we have non-standard clapack wrapper
 		
 		//we convert complexdouble *A into lapacke_complex type
 		lapacke_complex *newA = (lapacke_complex*)wcpgSafeMalloc((*n) * (*n) * sizeof(lapacke_complex));
@@ -134,7 +134,7 @@ void my_zgetri(int *n, complexdouble *A, int *lda,
 	
 	// #else
 		// zgetri_((integer*)n, (doublecomplex*)A, (integer*)lda, (integer*)ipiv, (doublecomplex*)work, (integer*)lwork, (integer*)info);
-	#endif
+	//#endif
 
 
 
@@ -147,7 +147,7 @@ void my_dgeevx(int *n, double *A, int *lda, double *wr, double *wi, double *vl, 
 
 {
 
-	#ifdef LAPACKE_HEADER 	//if we have non-standard clapack wrapper
+	//#ifdef LAPACKE_HEADER 	//if we have non-standard clapack wrapper
 
 	/*lapack_int LAPACKE_dgeevx( int matrix_order, char balanc, char jobvl,
                            char jobvr, char sense, lapack_int n, double* a,
@@ -173,7 +173,7 @@ void my_dgeevx(int *n, double *A, int *lda, double *wr, double *wi, double *vl, 
 	// 			 scale, abnrm, rconde, rcondv, work, (integer*)lwork, (integer*)iwork,\
 	// 			 (integer*)info); 
 	
-	#endif
+	//#endif
 }
 
 
