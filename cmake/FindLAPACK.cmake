@@ -45,20 +45,20 @@ pkg_check_modules(PC_LAPACK QUIET LAPACK)
 
 find_path(LAPACK_INCLUDE_DIR
     NAMES lapack.h
-    PATHS ${PC_LAPACK_INCLUDE_DIRS}
+    PATHS ${LAPACK_ROOT_DIR}/include ${PC_LAPACK_INCLUDE_DIRS}
     DOC "Path of LAPACK.h, the include file for GNU LAPACK library"
 )
 
 find_library(LAPACK_LIBRARY
     NAMES lapack
-    PATHS ${PC_LAPACK_LIBRARY_DIRS}
+    PATHS ${LAPACK_ROOT_DIR} ${PC_LAPACK_LIBRARY_DIRS}
     DOC "Directory of the LAPACK library"
 )
 
 find_library(LAPACKE_LIBRARY
     NAMES lapacke
-    PATHS ${PC_LAPACK_LIBRARY_DIRS}
-    DOC "Directory of the LAPACK library"
+    PATHS ${LAPACK_ROOT_DIR} ${PC_LAPACK_LIBRARY_DIRS}
+    DOC "Directory of the LAPACKe library"
 )
 
 set(LAPACK_VERSION ${PC_LAPACK_VERSION})
