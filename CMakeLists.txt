@@ -5,8 +5,9 @@ project(WCPG LANGUAGES C)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 set(CMAKE_IGNORE_PREFIX_PATH
-  "${CMAKE_IGNORE_PREFIX_PATH}"
-  "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr"
+    "${CMAKE_IGNORE_PREFIX_PATH}"
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr"
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/usr"
 )
 
 find_package(GMP REQUIRED)
