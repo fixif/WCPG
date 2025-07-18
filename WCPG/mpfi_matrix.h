@@ -82,8 +82,12 @@ extern "C" {
 #include <mpfi.h>
 #include <mpfi_io.h>
 #include <mpfr.h>
-#include <clapack_linalg.h>
+// #include <clapack_linalg.h>
+#include "lapacke.h"
+#include "lapacke_config.h"
+#include "lapacke_utils.h"
 #include "mpfr_matrix.h"
+#include "clapack_linalg.h"
 #include <math.h>
 
 
