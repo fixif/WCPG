@@ -49,6 +49,12 @@ find_path(LAPACK_INCLUDE_DIR
     DOC "Path of LAPACK.h, the include file for GNU LAPACK library"
 )
 
+find_path(LAPACKE_INCLUDE_DIR
+    NAMES lapacke.h
+    PATHS ${LAPACK_ROOT_DIR}/include ${PC_LAPACK_INCLUDE_DIRS}
+    DOC "Path of LAPACK.h, the include file for GNU LAPACK library"
+)
+
 find_library(LAPACK_LIBRARY
     NAMES lapack
     PATHS ${LAPACK_ROOT_DIR} ${PC_LAPACK_LIBRARY_DIRS}
@@ -75,7 +81,7 @@ find_package_handle_standard_args(
 
 if (LAPACK_FOUND)
     set(LAPACK_LIBRARIES ${LAPACK_LIBRARY} ${LAPACKE_LIBRARY})
-    set(LAPACK_INCLUDE_DIRS ${LAPACK_INCLUDE_DIR})
+    set(LAPACK_INCLUDE_DIRS ${LAPACK_INCLUDE_DIR} ${LAPACKE_INCLUDE_DIR})
     set(LAPACK_DEFINITIONS ${PC_LAPACK_FLAGS_OTHER})
 endif()
 
