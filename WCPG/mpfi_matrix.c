@@ -106,7 +106,7 @@ void freeMPFIMatrix(mpfi_t *A, uint64_t n, uint64_t m)
 
 void MPFIComplexMatrixPrint( mpfi_t *reA ,mpfi_t *imA, uint64_t m, uint64_t n)
 {
-	printf("Interval matrix of size %llu x %llu \n", m, n);
+	printf("Interval matrix of size %ld x %ld \n", m, n);
 	int i,j;
 	for(i = 0; i < m; ++i)
 	{
