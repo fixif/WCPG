@@ -277,7 +277,7 @@ int invertComplexMatrix(mpfr_t *reU, mpfr_t *imU,
    function is ready.
    The function returns non-zero value in case of success and zero if check failed.
     */
-int inverseConditionsTest();
+int inverseConditionsTest(complexdouble *V, complexdouble *S, uint64_t n);
 
 
 /* Compute the square of absolte value for a complex number, i.e.
