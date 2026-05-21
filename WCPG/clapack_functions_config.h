@@ -59,9 +59,7 @@ extern "C" {
 #endif
 
 #include <stdlib.h>
-#include "config.h"
 #include "aux_funcs.h"
-
 
 //#include <f2c.h>
 
@@ -97,7 +95,7 @@ typedef struct complexdouble
 }complexdouble;
 
 #define doublereal double
-#define lapack_int int
+// #define lapack_int int
 #define integer long int 
 #define lapacke_complex double _Complex
 

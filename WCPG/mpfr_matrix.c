@@ -165,7 +165,7 @@ void copyMatrix(mpfr_t *B, mpfr_t *A, uint64_t n, uint64_t m) {
 
 void MPFRComplexMatrixPrint( mpfr_t *reA ,mpfr_t *imA, uint64_t m, uint64_t n)
 {
-	printf("MPFR matrix of size %llu x %llu \n", m, n);
+	printf("MPFR matrix of size %ld x %ld \n", m, n);
 	int i,j;
 	for(i = 0; i < m; ++i)
 	{
@@ -179,7 +179,7 @@ void MPFRComplexMatrixPrint( mpfr_t *reA ,mpfr_t *imA, uint64_t m, uint64_t n)
 
 void MPFRComplexMatrixPrint2( FILE *file, mpfr_t *reA ,mpfr_t *imA, uint64_t m, uint64_t n)
 {
-	printf("MPFR matrix of size %llu x %llu \n", m, n);
+	printf("MPFR matrix of size %ld x %ld \n", m, n);
 	int i,j;
 	for(i = 0; i < m; ++i)
 	{

@@ -1,46 +1,22 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.28)
 project(WCPG LANGUAGES C)
 
 # Add custom modules path
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/")
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-include(CheckIncludeFile)
-include(CheckIncludeFiles)
+set(CMAKE_IGNORE_PREFIX_PATH
+    "${CMAKE_IGNORE_PREFIX_PATH}"
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr"
+    "/Library/Developer/CommandLineTools/SDKs/MacOSX15.5.sdk/usr"
+)
 
-# === Find required packages ===
 find_package(GMP REQUIRED)
 find_package(MPFR REQUIRED)
 find_package(MPFI REQUIRED)
 find_package(LAPACK REQUIRED)
 
-# === Header checks ===
-check_include_file(stdbool.h HAVE_STDBOOL_H)
-check_include_files("string.h;float.h;sys/time.h;limits.h" HAVE_SYS_HEADERS)
+message(STATUS "Libaries: ${LAPACK_LIBRARIES}")
 
-# === Required headers enforcement (additional to find_package) ===
-check_include_file(mpfr.h HAVE_MPFR_H)
-check_include_file(mpfi.h HAVE_MPFI_H)
-check_include_file(mpfi_io.h HAVE_MPFI_IO_H)
-check_include_file(lapacke.h HAVE_LAPACKE_H)
-
-if(NOT HAVE_MPFR_H)
-    message(FATAL_ERROR "Required header 'mpfr.h' not found.")
-endif()
-if(NOT HAVE_MPFI_H)
-    message(FATAL_ERROR "Required header 'mpfi.h' not found.")
-endif()
-if(NOT HAVE_MPFI_IO_H)
-    message(FATAL_ERROR "Required header 'mpfi_io.h' not found.")
-endif()
-if(NOT HAVE_LAPACKE_H)
-    message(FATAL_ERROR "Required header 'lapacke.h' not found.")
-endif()
-
-# === Generate config.h ===
-configure_file(
-    ${CMAKE_CURRENT_SOURCE_DIR}/config.h.in
-    ${CMAKE_CURRENT_BINARY_DIR}/config.h
-)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 # === Source files ===
@@ -58,14 +34,13 @@ target_include_directories(wcpg
         ${LAPACK_INCLUDE_DIRS}
 )
 
-target_compile_features(wcpg PUBLIC c_std_89)
-
 target_link_libraries(wcpg
     PUBLIC
         ${GMP_LIBRARIES}
         ${MPFR_LIBRARIES}
         ${MPFI_LIBRARIES}
         ${LAPACK_LIBRARIES}
+        m
 )
 
 # === Optional examples ===

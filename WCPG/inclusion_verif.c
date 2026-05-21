@@ -535,7 +535,7 @@ int checkEigensystemInclusion(mpfi_t *rev_corrected, mpfi_t *imv_corrected, mpfi
 	context_algo_data_init(&algo, n, prec);
 
 	input.k = find_zeta_k(v, n);
-	printf("k = %llu \n", input.k);
+	printf("k = %ld \n", input.k);
 
 	complexdoubleToMPFIMatrix(input.reA, input.imA, A, n, n);
 	complexdoubleToMPFIMatrix(input.rev, input.imv, v, 1, n);
