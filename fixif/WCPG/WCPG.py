@@ -17,7 +17,8 @@ __status__ = "Beta"
 
 import ctypes
 import ctypes.util
-from numpy import empty, float64, mat
+from numpy import empty, float64
+from numpy import matrix as mat
 
 
 class wcpg_result(ctypes.Structure):
