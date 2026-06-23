@@ -81,19 +81,19 @@ endif()
 if(APPLE AND NOT LAPACK_lapack)
   find_path(LAPACK_INCLUDE_DIR
     NAMES lapacke.h clapack.h
-    PATHS /opt/homebrew/include /usr/local/include /usr/local/opt/lapack/include
+    PATHS /opt/homebrew/include /opt/homebrew/opt/lapack/include /usr/local/include /usr/local/opt/lapack/include
     ${_lapack_no_default}
   )
   find_library(LAPACK_lapack NAMES lapack
-    PATHS /opt/homebrew/lib /usr/local/lib /usr/local/opt/lapack/lib
+    PATHS /opt/homebrew/lib /usr/local/lib /usr/local/opt/lapack/lib /opt/homebrew/opt/lapack/lib
     ${_lapack_no_default}
   )
   find_library(LAPACK_lapacke NAMES lapacke
-    PATHS /opt/homebrew/lib /usr/local/lib /usr/local/opt/lapack/lib
+    PATHS /opt/homebrew/lib /usr/local/lib /usr/local/opt/lapack/lib /opt/homebrew/opt/lapack/lib
     ${_lapack_no_default}
   )
   find_library(LAPACK_blas NAMES blas openblas
-    PATHS /opt/homebrew/lib /usr/local/lib /usr/local/opt/lapack/lib
+    PATHS /opt/homebrew/lib /usr/local/lib /usr/local/opt/lapack/lib /opt/homebrew/opt/lapack/lib
     ${_lapack_no_default}
   )
 endif()
